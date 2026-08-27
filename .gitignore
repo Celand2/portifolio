@@ -1,5 +1,4 @@
 node_modules/
-dist/
 
 # Environment and local secrets
 .env
