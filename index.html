@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Celeus Ndikumana — Créateur de sites web</title>
+	</head>
+	<body class="bg-white font-sans text-[#1a1a1a] dark:bg-[#0f0f0f] dark:text-white">
+		<header class="border-b border-slate-200 dark:border-white/10">
+			<nav class="relative mx-auto max-w-6xl px-5 py-4">
+				<div class="flex items-center justify-between gap-4">
+					<a href="index.html" class="font-bold">Celeus Ndikumana</a>
+					<div class="flex items-center gap-2">
+						<button data-theme-toggle class="rounded-md border border-slate-300 px-3 py-2 text-xs dark:border-white/20">Mode</button>
+						<button data-menu-toggle aria-expanded="false" aria-label="Ouvrir le menu" aria-controls="mobile-navigation" class="rounded-md border border-slate-300 px-3 py-2 text-lg leading-none lg:hidden dark:border-white/20">&#9776;</button>
+					</div>
+				</div>
+				<div id="mobile-navigation" data-mobile-menu class="fixed inset-0 z-[60] hidden text-sm lg:absolute lg:inset-auto lg:right-24 lg:top-1/2 lg:z-auto lg:mt-0 lg:flex lg:-translate-y-1/2 lg:bg-transparent lg:p-0">
+					<div class="mobile-menu-panel">
+						<div class="mb-6 flex items-center justify-between lg:hidden"><span class="font-bold">Navigation</span><button data-menu-close class="rounded-md border border-slate-300 px-3 py-2 text-xs dark:border-white/20">Fermer</button></div>
+						<div class="mobile-menu-links">
+							<a class="font-bold text-[#0047AB] dark:text-[#00A8E8]" href="index.html">Accueil</a>
+							<a href="apropos.html">À propos</a><a href="specialites.html">Spécialités</a><a href="projets.html">Projets</a><a href="processus.html">Processus</a><a href="contact.html">Contact</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<main class="mx-auto max-w-6xl px-5 py-10 sm:py-16">
+			<section class="grid items-center gap-10 md:grid-cols-[1.2fr_.8fr] md:gap-16">
+				<div>
+					<p class="text-xs font-bold tracking-[.16em] text-[#0047AB] dark:text-[#00A8E8]">CRÉATEUR DIGITAL · BUJUMBURA</p>
+					<h1 class="mt-4 text-5xl font-bold leading-tight sm:text-6xl">Des sites qui rendent votre activité <span class="font-normal text-slate-400">visible et crédible.</span></h1>
+					<p class="mt-6 max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">Je crée des landing pages et sites commerciaux clairs, rapides et pensés pour transformer les visiteurs en clients.</p>
+					<div class="mt-8 flex flex-wrap gap-3">
+						<a href="contact.html" class="rounded-md bg-[#0047AB] px-4 py-3 text-sm font-bold text-white dark:bg-[#00A8E8] dark:text-[#0f0f0f]">Parlons de votre projet</a>
+						<a href="projets.html" class="rounded-md border border-slate-300 px-4 py-3 text-sm font-bold dark:border-white/20">Voir mes projets</a>
+					</div>
+				</div>
+				<div class="flex justify-center md:justify-end">
+					<div class="rounded-full border-8 border-slate-100 p-2 shadow-xl dark:border-white/10">
+						<img src="/images/hero.png" alt="Portrait de Celeus Ndikumana" class="h-64 w-64 rounded-full object-cover object-top sm:h-80 sm:w-80" />
+					</div>
+				</div>
+			</section>
+			<section class="mt-16 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-3 dark:border-white/10">
+				<div><p class="text-2xl font-bold">01</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Comprendre votre besoin</p></div>
+				<div><p class="text-2xl font-bold">02</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Créer une expérience claire</p></div>
+				<div><p class="text-2xl font-bold">03</p><p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Livrer un site prêt à convertir</p></div>
+			</section>
+		</main>
+		<script type="module" src="/src/main.js"></script>
+	</body>
+</html>
