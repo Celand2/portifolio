@@ -11,6 +11,42 @@ body.menu-open {
   overflow: hidden;
 }
 
+.site-header {
+  background: #0047ab;
+  color: #ffffff;
+}
+
+.site-header a {
+  color: #ffffff;
+}
+
+.site-header a.font-bold.text-\[\#0047AB\] {
+  color: #00a8e8;
+}
+
+.site-header button {
+  border-color: rgb(255 255 255 / 0.45);
+  color: #ffffff;
+}
+
+.site-footer {
+  background: #0047ab;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.site-footer h2,
+.site-footer p.font-bold {
+  color: #ffffff;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+.site-footer p.border-t {
+  border-color: rgb(255 255 255 / 0.25);
+}
+
 @media (max-width: 1023px) {
   [data-mobile-menu] {
     position: fixed !important;
@@ -31,13 +67,24 @@ body.menu-open {
   }
 
   .dark [data-mobile-menu] {
-    background: rgb(15 15 15 / 0.98);
+    background: rgb(0 71 171 / 0.98);
     border-color: rgb(255 255 255 / 0.14);
   }
 
   .mobile-menu-panel {
     width: 100%;
     height: 100%;
+    color: #000000;
+  }
+
+  .site-header .mobile-menu-panel a,
+  .site-header .mobile-menu-panel button,
+  .site-header .mobile-menu-panel span {
+    color: #000000;
+  }
+
+  .site-header .mobile-menu-panel a.font-bold.text-\[\#0047AB\] {
+    color: #0047ab;
   }
 
   .mobile-menu-links {
