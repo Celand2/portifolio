@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 const rootDir = import.meta.dirname;
 
 export default defineConfig({
+  base: "/portifolio/",
   plugins: [tailwindcss()],
   build: {
     rollupOptions: {
