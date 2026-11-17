@@ -46,12 +46,86 @@ document.querySelectorAll("[data-filter]").forEach((button) =>
     });
   }),
 );
-document.querySelector("#contact-form")?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  document.querySelector("[data-form-status]").textContent =
-    "Merci ! Votre message a bien été préparé.";
-  event.currentTarget.reset();
-});
+document
+  .querySelector("#contact-form")
+  ?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const status = form.querySelector("[data-form-status]");
+    const submitButton = form.querySelector('button[type="submit"]');
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+    status.classList.remove(
+      "text-emerald-600",
+      "text-amber-700",
+      "text-red-600",
+    );
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      status.textContent =
+        "Le formulaire n’est pas encore configuré. Contactez-moi directement par email.";
+      status.classList.add("text-red-600");
+      return;
+    }
+
+    const originalLabel = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = "Envoi en cours...";
+    form.setAttribute("aria-busy", "true");
+    status.textContent = "";
+
+    try {
+      const response = await fetch(
+        `${supabaseUrl.replace(/\/$/, "")}/functions/v1/contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: supabaseAnonKey,
+            Authorization: `Bearer ${supabaseAnonKey}`,
+          },
+          body: JSON.stringify(
+            Object.fromEntries(new FormData(form).entries()),
+          ),
+        },
+      );
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        throw new Error("La réponse du serveur est invalide. Réessayez plus tard.");
+      }
+
+      if (
+        !response.ok ||
+        result?.ok !== true ||
+        typeof result.notificationSent !== "boolean"
+      ) {
+        throw new Error(result?.error || "Impossible d’envoyer votre message.");
+      }
+
+      form.reset();
+      if (result.notificationSent === false) {
+        status.textContent =
+          "Votre message a été enregistré, mais la notification email n’a pas pu être envoyée. Contactez-moi directement par email si nécessaire.";
+        status.classList.add("text-amber-700");
+      } else {
+        status.textContent = "Merci, votre message a bien été envoyé.";
+        status.classList.add("text-emerald-600");
+      }
+    } catch (error) {
+      status.textContent =
+        error instanceof Error
+          ? error.message
+          : "Une erreur est survenue. Veuillez réessayer.";
+      status.classList.add("text-red-600");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalLabel;
+      form.removeAttribute("aria-busy");
+    }
+  });
 document
   .querySelectorAll("[data-year]")
   .forEach((item) => (item.textContent = new Date().getFullYear()));
