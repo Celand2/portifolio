@@ -1,11 +1,34 @@
 import "./style.css";
 const root = document.documentElement;
 const toggle = document.querySelector("[data-theme-toggle]");
+const themeIcon = document.querySelector("[data-theme-icon]");
 const applyTheme = (theme) => {
-  root.classList.toggle("dark", theme === "dark");
-  localStorage.setItem("theme", theme);
+  const isDark = theme === "dark";
+  root.classList.toggle("dark", isDark);
+  if (themeIcon) {
+    themeIcon.src = isDark ? "./icones/lune.svg" : "./icones/soleil.svg";
+    toggle?.setAttribute(
+      "aria-label",
+      isDark ? "Activer le mode jour" : "Activer le mode nuit",
+    );
+    toggle?.setAttribute(
+      "title",
+      isDark ? "Activer le mode jour" : "Activer le mode nuit",
+    );
+  }
+  try {
+    localStorage.setItem("theme", theme);
+  } catch (error) {
+    console.error("Impossible d’enregistrer le thème choisi.", error);
+  }
 };
-applyTheme(localStorage.getItem("theme") || "light");
+let savedTheme = "light";
+try {
+  savedTheme = localStorage.getItem("theme") || "light";
+} catch (error) {
+  console.error("Impossible de lire le thème enregistré.", error);
+}
+applyTheme(savedTheme);
 toggle?.addEventListener("click", () =>
   applyTheme(root.classList.contains("dark") ? "light" : "dark"),
 );
@@ -36,22 +59,26 @@ if (
 
 const menu = document.querySelector("[data-mobile-menu]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
+const menuIcon = document.querySelector("[data-menu-icon]");
 const closeMenu = () => {
   menu?.classList.add("hidden");
   menu?.classList.remove("flex", "is-open");
   menuToggle?.setAttribute("aria-expanded", "false");
+  menuToggle?.setAttribute("aria-label", "Ouvrir le menu");
+  if (menuIcon) menuIcon.textContent = "☰";
   document.body.classList.remove("menu-open");
 };
 const openMenu = () => {
   menu?.classList.remove("hidden");
   menu?.classList.add("flex", "is-open");
   menuToggle?.setAttribute("aria-expanded", "true");
+  menuToggle?.setAttribute("aria-label", "Fermer le menu");
+  if (menuIcon) menuIcon.textContent = "×";
   document.body.classList.add("menu-open");
 };
 menuToggle?.addEventListener("click", () =>
   menu?.classList.contains("is-open") ? closeMenu() : openMenu(),
 );
-document.querySelector("[data-menu-close]")?.addEventListener("click", closeMenu);
 menu?.addEventListener("click", (event) => {
   if (event.target === menu || event.target.closest("a")) closeMenu();
 });

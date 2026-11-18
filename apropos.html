@@ -15,18 +15,28 @@
           <div class="flex items-center gap-2">
             <button
               data-theme-toggle
-              class="rounded-md border border-slate-300 px-3 py-2 text-xs dark:border-white/20"
+              type="button"
+              aria-label="Activer le mode nuit"
+              title="Activer le mode nuit"
+              class="grid h-10 w-10 place-items-center rounded-md border border-slate-300 dark:border-white/20"
             >
-              Mode
+              <img
+                data-theme-icon
+                src="./icones/soleil.svg"
+                alt=""
+                aria-hidden="true"
+                class="h-5 w-5 dark:brightness-0 dark:invert"
+              />
             </button>
             <button
               data-menu-toggle
+              type="button"
               aria-expanded="false"
               aria-label="Ouvrir le menu"
               aria-controls="mobile-navigation"
-              class="rounded-md border border-slate-300 px-3 py-2 text-lg leading-none lg:hidden dark:border-white/20"
+              class="grid h-10 w-10 place-items-center rounded-md border border-slate-300 text-2xl leading-none lg:hidden dark:border-white/20"
             >
-              &#9776;
+              <span data-menu-icon aria-hidden="true">&#9776;</span>
             </button>
           </div>
         </div>
@@ -35,7 +45,7 @@
           data-mobile-menu
           class="fixed inset-0 z-[60] hidden text-sm lg:absolute lg:inset-auto lg:right-24 lg:top-1/2 lg:z-auto lg:mt-0 lg:flex lg:-translate-y-1/2 lg:bg-transparent lg:p-0"
         >
-          <div class="mobile-menu-panel"><div class="mb-6 flex items-center justify-between lg:hidden"><span class="font-bold">Navigation</span><button data-menu-close class="rounded-md border border-slate-300 px-3 py-2 text-xs dark:border-white/20">Fermer</button></div>
+          <div class="mobile-menu-panel"><div class="mb-6 flex items-center justify-between lg:hidden"><span class="font-bold">Navigation</span></div>
           <div class="mobile-menu-links">
           <a href="index.html">Accueil</a
           ><a
