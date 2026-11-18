@@ -9,6 +9,31 @@ applyTheme(localStorage.getItem("theme") || "light");
 toggle?.addEventListener("click", () =>
   applyTheme(root.classList.contains("dark") ? "light" : "dark"),
 );
+
+const revealItems = document.querySelectorAll("main > section, main > footer");
+if (
+  "IntersectionObserver" in window &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  revealItems.forEach((item, index) => {
+    item.classList.add("section-reveal");
+    item.style.setProperty("--reveal-delay", `${Math.min(index * 90, 270)}ms`);
+    revealObserver.observe(item);
+  });
+}
+
 const menu = document.querySelector("[data-mobile-menu]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const closeMenu = () => {
